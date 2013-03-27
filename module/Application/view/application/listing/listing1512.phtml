@@ -1,0 +1,74 @@
+<?php 
+/**
+ * ZF2 Buch Kapitel 15
+ * 
+ * Das Buch "Zend Framework 2 - Von den Grundlagen bis zur fertigen Anwendung"
+ * von Ralf Eggert ist im Addison-Wesley Verlag erschienen. 
+ * ISBN 978-3-8273-2994-3
+ * 
+ * @package    Application
+ * @author     Ralf Eggert <r.eggert@travello.de>
+ * @copyright  Alle Listings sind urheberrechtlich geschützt!
+ * @link       http://www.zendframeworkbuch.de/ und http://www.awl.de/2994
+ */
+
+/**
+ * Listing 15.12 view script
+ * 
+ * @package    Application
+ */
+
+$this->headTitle('Listing 15.12');
+$this->pageTitle('Listing 15.12');
+?>
+<h3><code>Zend\Navigation</code> Konfiguration in <code>module.config.php</code></h3>
+<pre>
+&lt;?php
+return array(
+    [...]
+    
+    'service_manager' => array(
+        'factories' => array(
+            'navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory'
+        ),
+    ),
+    
+    [...]
+    
+    'navigation' => array(
+        'default' => array(
+            'service' => array(
+                'type'       => 'mvc',
+                'order'      => '900',
+                'label'      => 'Über uns',
+                'route'      => 'application',
+                'controller' => 'about',
+                'action'     => 'index',
+                'pages'      => array(
+                    'team' => array(
+                        'type'       => 'mvc',
+                        'label'      => 'Team',
+                        'route'      => 'application',
+                        'controller' => 'about',
+                        'action'     => 'team',
+                    ),
+                    'contact' => array(
+                        'type'       => 'mvc',
+                        'label'      => 'Kontakt',
+                        'route'      => 'application',
+                        'controller' => 'about',
+                        'action'     => 'contact',
+                    ),
+                    'imprint' => array(
+                        'type'       => 'mvc',
+                        'label'      => 'Impressum',
+                        'route'      => 'application',
+                        'controller' => 'about',
+                        'action'     => 'imprint',
+                    ),
+                ),
+            ),
+        ),
+    ),
+);
+</pre>

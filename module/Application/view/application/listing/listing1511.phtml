@@ -1,0 +1,38 @@
+<?php 
+/**
+ * ZF2 Buch Kapitel 15
+ * 
+ * Das Buch "Zend Framework 2 - Von den Grundlagen bis zur fertigen Anwendung"
+ * von Ralf Eggert ist im Addison-Wesley Verlag erschienen. 
+ * ISBN 978-3-8273-2994-3
+ * 
+ * @package    Application
+ * @author     Ralf Eggert <r.eggert@travello.de>
+ * @copyright  Alle Listings sind urheberrechtlich geschützt!
+ * @link       http://www.zendframeworkbuch.de/ und http://www.awl.de/2994
+ */
+
+/**
+ * Listing 15.11 view script
+ * 
+ * @package    Application
+ */
+
+$this->headTitle('Listing 15.11');
+$this->pageTitle('Listing 15.11');
+?>
+<h3>Layout-Skript <code>layout/sidebar</code> für die Seitenleiste</h3>
+<pre>
+&lt;?php
+$url = $this-&gt;url(
+    'application', array('controller' =&gt; 'about', 'action' =&gt; 'team')
+);
+?&gt;
+&lt;div class="well"&gt;
+&lt;h4 class="pull-center"&gt;Ihr Team&lt;/h4&gt;
+&lt;div class="pull-center"&gt;
+&lt;a href="&lt;?php echo $url?&gt;"&gt;&lt;img src="/img/team/team.png" alt="Team" /&gt;&lt;/a&gt;
+&lt;p&gt;&lt;small&gt;Luigi, Francesca, Alessandro, Valentina&lt;/small&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</pre>

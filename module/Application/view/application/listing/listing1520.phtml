@@ -1,0 +1,51 @@
+<?php 
+/**
+ * ZF2 Buch Kapitel 15
+ * 
+ * Das Buch "Zend Framework 2 - Von den Grundlagen bis zur fertigen Anwendung"
+ * von Ralf Eggert ist im Addison-Wesley Verlag erschienen. 
+ * ISBN 978-3-8273-2994-3
+ * 
+ * @package    Application
+ * @author     Ralf Eggert <r.eggert@travello.de>
+ * @copyright  Alle Listings sind urheberrechtlich geschützt!
+ * @link       http://www.zendframeworkbuch.de/ und http://www.awl.de/2994
+ */
+
+/**
+ * Listing 15.20 view script
+ * 
+ * @package    Application
+ */
+
+use Zend\Filter\StaticFilter;
+
+$this->headTitle('Listing 15.20');
+$this->pageTitle('Listing 15.20');
+?>
+<h3>Geänderte <code>Module.php</code> zum Registrieren des <code>StringToUrl</code> Filters</h3>
+<pre>
+&lt;?php
+namespace Application;
+
+use Zend\Filter\StaticFilter;
+
+class Module implements 
+    BootstrapListenerInterface,
+    ConfigProviderInterface,
+    AutoloaderProviderInterface
+{
+    public function onBootstrap(EventInterface $e)
+    {
+        [...]
+        
+        StaticFilter::getPluginManager()->setInvokableClass(
+            'stringToUrl', 'Application\Filter\StringToUrl'
+        );
+
+        StaticFilter::getPluginManager()->setInvokableClass(
+            'StringHtmlPurifier', 'Application\Filter\StringHtmlPurifier'
+        );
+    }
+}
+</pre>

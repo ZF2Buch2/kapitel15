@@ -1,0 +1,64 @@
+<?php 
+/**
+ * ZF2 Buch Kapitel 15
+ * 
+ * Das Buch "Zend Framework 2 - Von den Grundlagen bis zur fertigen Anwendung"
+ * von Ralf Eggert ist im Addison-Wesley Verlag erschienen. 
+ * ISBN 978-3-8273-2994-3
+ * 
+ * @package    Application
+ * @author     Ralf Eggert <r.eggert@travello.de>
+ * @copyright  Alle Listings sind urheberrechtlich geschützt!
+ * @link       http://www.zendframeworkbuch.de/ und http://www.awl.de/2994
+ */
+
+/**
+ * Listing 15.16 view script
+ * 
+ * @package    Application
+ */
+
+$this->headTitle('Listing 15.16');
+$this->pageTitle('Listing 15.16');
+?>
+<h3>Anpassung <code>ApplicationListener</code> für Validatorennachrichten</h3>
+<pre>
+&lt;?php
+namespace Application\Listener;
+
+use Zend\I18n\Translator\Translator;
+use Zend\Validator\AbstractValidator;
+
+class ApplicationListener implements ListenerAggregateInterface
+{
+    public function attach(EventManagerInterface $events)
+    {
+        [...]
+        
+        $this->listeners[] = $events->attach(
+            MvcEvent::EVENT_DISPATCH, 
+            array($this, 'addValidatorTranslations'), 
+            100
+        );
+    }
+
+    public function addValidatorTranslations(EventInterface $e)
+    {
+        $baseDir = LUIGI_ROOT . '/module/Application/language';
+        
+        $translator = Translator::factory(array(
+            'locale'                    => 'de',
+            'translation_file_patterns' => array(
+                array(
+                    'type'        => 'phpArray',
+                    'base_dir'    => $baseDir,
+                    'pattern'     => 'Zend_Validate.php',
+                    'text_domain' => 'default',
+                ),
+            )
+        ));
+        
+        AbstractValidator::setDefaultTranslator($translator);
+    }
+}
+</pre>

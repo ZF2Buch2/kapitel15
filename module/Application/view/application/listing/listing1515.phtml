@@ -1,0 +1,44 @@
+<?php 
+/**
+ * ZF2 Buch Kapitel 15
+ * 
+ * Das Buch "Zend Framework 2 - Von den Grundlagen bis zur fertigen Anwendung"
+ * von Ralf Eggert ist im Addison-Wesley Verlag erschienen. 
+ * ISBN 978-3-8273-2994-3
+ * 
+ * @package    Application
+ * @author     Ralf Eggert <r.eggert@travello.de>
+ * @copyright  Alle Listings sind urheberrechtlich geschützt!
+ * @link       http://www.zendframeworkbuch.de/ und http://www.awl.de/2994
+ */
+
+/**
+ * Listing 15.15 view script
+ * 
+ * @package    Application
+ */
+
+$this->headTitle('Listing 15.15');
+$this->pageTitle('Listing 15.15');
+?>
+<h3>View-Skript <code>/view/application/about/index.phtml</code></h3>
+<pre>
+&lt;?php 
+$this->headTitle('Über uns');
+$this->pageTitle('Luigis Pizza-Service stellt sich vor');
+?&gt;
+&lt;p&gt;Lorem ipsum dolor sit amet, consectetuer adipiscing elit. [...]&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="&lt;?php echo $this-&gt;url(
+    'application', array('controller' =&gt; 'about', 'action' =&gt; 'team')
+)?&gt;"&gt;Team&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="&lt;?php echo $this-&gt;url(
+    'application', array('controller' =&gt; 'about', 'action' =&gt; 'contact')
+)?&gt;"&gt;Kontakt&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="&lt;?php echo $this-&gt;url(
+    'application', array('controller' =&gt; 'about', 'action' =&gt; 'imprint')
+)?&gt;"&gt;Impressum&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;In enim justo, rhoncus ut, imperdiet a, venenatis vitae, [...]&lt;/p&gt;
+&lt;p&gt;Phasellus viverra nulla ut metus varius laoreet. [...]&lt;/p&gt;
+</pre>

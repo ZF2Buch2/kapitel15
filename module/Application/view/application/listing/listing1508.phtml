@@ -1,0 +1,93 @@
+<?php 
+/**
+ * ZF2 Buch Kapitel 15
+ * 
+ * Das Buch "Zend Framework 2 - Von den Grundlagen bis zur fertigen Anwendung"
+ * von Ralf Eggert ist im Addison-Wesley Verlag erschienen. 
+ * ISBN 978-3-8273-2994-3
+ * 
+ * @package    Application
+ * @author     Ralf Eggert <r.eggert@travello.de>
+ * @copyright  Alle Listings sind urheberrechtlich geschützt!
+ * @link       http://www.zendframeworkbuch.de/ und http://www.awl.de/2994
+ */
+
+/**
+ * Listing 15.8 view script
+ * 
+ * @package    Application
+ */
+
+$this->headTitle('Listing 15.8');
+$this->pageTitle('Listing 15.8');
+?>
+<h3><code>ApplicationListener</code> zur Erweiterung des zweistufigen Layouts</h3>
+<pre>
+&lt;?php
+namespace Application\Listener;
+
+use Locale;
+use Zend\EventManager\EventInterface;
+use Zend\EventManager\EventManagerInterface;
+use Zend\EventManager\ListenerAggregateInterface;
+use Zend\Mvc\MvcEvent;
+use Zend\View\Model\ViewModel;
+
+class ApplicationListener implements ListenerAggregateInterface
+{
+    protected $listeners = array();
+
+    public function attach(EventManagerInterface $events)
+    {
+        $this->listeners[] = $events->attach(
+            MvcEvent::EVENT_RENDER, array($this, 'renderLayoutSegments'), -100
+        );
+        $this->listeners[] = $events->attach(
+            MvcEvent::EVENT_DISPATCH, array($this, 'setupLocalization'), -100
+        );
+    }
+
+    public function detach(EventManagerInterface $events)
+    {
+        foreach ($this->listeners as $index => $listener) {
+            if ($events->detach($listener)) {
+                unset($this->listeners[$index]);
+            }
+        }
+    }
+
+    public function renderLayoutSegments(EventInterface $e)
+    {
+        $viewModel = $e->getViewModel();
+        
+        $header = new ViewModel();
+        $header->setTemplate('layout/header');
+        $viewModel->addChild($header, 'header');
+        
+        $sidebar = new ViewModel();
+        $sidebar->setTemplate('layout/sidebar');
+        $viewModel->addChild($sidebar, 'sidebar');
+        
+        $footer = new ViewModel();
+        $footer->setTemplate('layout/footer');
+        $viewModel->addChild($footer, 'footer');
+        
+        return $e->getResponse();
+    }
+    
+    public function setupLocalization(EventInterface $e)
+    {
+        // get service manager
+        $serviceManager = $e->getApplication()->getServiceManager();
+        $viewManager    = $serviceManager->get('viewmanager');
+        
+        // set locale
+        Locale::setDefault('de_DE');
+        
+        // setup currency view helper
+        $helper = $viewManager->getRenderer()->plugin('currencyformat');
+        $helper->setCurrencyCode('EUR');
+        $helper->setShouldShowDecimals(true);
+    }
+}
+</pre>

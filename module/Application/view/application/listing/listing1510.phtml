@@ -1,0 +1,58 @@
+<?php 
+/**
+ * ZF2 Buch Kapitel 15
+ * 
+ * Das Buch "Zend Framework 2 - Von den Grundlagen bis zur fertigen Anwendung"
+ * von Ralf Eggert ist im Addison-Wesley Verlag erschienen. 
+ * ISBN 978-3-8273-2994-3
+ * 
+ * @package    Application
+ * @author     Ralf Eggert <r.eggert@travello.de>
+ * @copyright  Alle Listings sind urheberrechtlich geschützt!
+ * @link       http://www.zendframeworkbuch.de/ und http://www.awl.de/2994
+ */
+
+/**
+ * Listing 15.10 view script
+ * 
+ * @package    Application
+ */
+
+$this->headTitle('Listing 15.10');
+$this->pageTitle('Listing 15.10');
+?>
+<h3>Layout View-Skript verwendet Layoutsegmente</h3>
+<pre>
+&lt;?php echo $this->doctype(); ?&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+&lt;meta charset="utf-8"&gt;
+&lt;?php echo $this-&gt;headTitle(); ?&gt;
+&lt;?php echo $this-&gt;headMeta(); ?&gt;
+&lt;?php echo $this-&gt;headLink(); ?&gt;
+&lt;?php echo $this-&gt;headScript(); ?&gt;
+&lt;?php echo $this-&gt;headStyle(); ?&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;?php echo $this-&gt;header; ?&gt;
+&lt;div class="container"&gt;
+&lt;div class="row"&gt;
+&lt;div class="span9 content"&gt;
+&lt;div class="well"&gt;
+&lt;?php echo $this-&gt;pageTitle(); ?&gt;
+&lt;?php echo $this-&gt;showMessages(); ?&gt;
+&lt;?php echo $this-&gt;content; ?&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="span3 sidebar"&gt;
+&lt;?php echo $this-&gt;sidebar; ?&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;?php echo $this-&gt;footer; ?&gt;
+&lt;script src="/js/jquery.min.js"&gt;&lt;/script&gt;
+&lt;script src="/js/bootstrap.min.js"&gt;&lt;/script&gt;
+&lt;?php echo $this-&gt;inlineScript() ?&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>

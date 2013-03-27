@@ -1,0 +1,54 @@
+<?php 
+/**
+ * ZF2 Buch Kapitel 15
+ * 
+ * Das Buch "Zend Framework 2 - Von den Grundlagen bis zur fertigen Anwendung"
+ * von Ralf Eggert ist im Addison-Wesley Verlag erschienen. 
+ * ISBN 978-3-8273-2994-3
+ * 
+ * @package    Application
+ * @author     Ralf Eggert <r.eggert@travello.de>
+ * @copyright  Alle Listings sind urheberrechtlich geschützt!
+ * @link       http://www.zendframeworkbuch.de/ und http://www.awl.de/2994
+ */
+
+/**
+ * Listing 15.14 view script
+ * 
+ * @package    Application
+ */
+
+$this->headTitle('Listing 15.14');
+$this->pageTitle('Listing 15.14');
+?>
+<h3><code>AboutController</code> für "Über uns" Seiten</h3>
+<pre>
+&lt;?php
+namespace Application\Controller;
+
+use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\ViewModel;
+
+class AboutController extends AbstractActionController
+{
+    public function indexAction()
+    {
+        return new ViewModel();
+    }
+    
+    public function imprintAction()
+    {
+        return new ViewModel();
+    }
+    
+    public function teamAction()
+    {
+        return new ViewModel();
+    }
+    
+    public function contactAction()
+    {
+        return new ViewModel();
+    }
+}
+</pre>

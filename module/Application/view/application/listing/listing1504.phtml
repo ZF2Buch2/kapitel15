@@ -1,0 +1,74 @@
+<?php 
+/**
+ * ZF2 Buch Kapitel 15
+ * 
+ * Das Buch "Zend Framework 2 - Von den Grundlagen bis zur fertigen Anwendung"
+ * von Ralf Eggert ist im Addison-Wesley Verlag erschienen. 
+ * ISBN 978-3-8273-2994-3
+ * 
+ * @package    Application
+ * @author     Ralf Eggert <r.eggert@travello.de>
+ * @copyright  Alle Listings sind urheberrechtlich geschützt!
+ * @link       http://www.zendframeworkbuch.de/ und http://www.awl.de/2994
+ */
+
+/**
+ * Listing 15.4 view script
+ * 
+ * @package    Application
+ */
+
+$this->headTitle('Listing 15.4');
+$this->pageTitle('Listing 15.4');
+?>
+<h3><code>ShowMessages</code> View-Helper zur Ausgabe von Meldungen</h3>
+<pre>
+&lt;?php
+namespace Application\View\Helper;
+
+use Zend\Mvc\Controller\Plugin\FlashMessenger;
+use Zend\View\Helper\AbstractHelper;
+
+class ShowMessages extends AbstractHelper
+{
+    protected $flashMessenger;
+
+    public function __construct(FlashMessenger $flashMessenger)
+    {
+        $this->setFlashMessenger($flashMessenger);
+    }
+
+    public function __invoke()
+    {
+        $messages = array_unique(array_merge(
+            $this->flashMessenger->getMessages(), 
+            $this->flashMessenger->getCurrentMessages()
+        ));
+        
+        $output = '';
+        
+        foreach ($messages as $message) {
+            $output.= '&lt;div class="alert"&gt;';
+            $output.= '&lt;button class="close" data-dismiss="alert" type="button"&gt;×&lt;/button&gt;';
+            $output.= $message;
+            $output.= '&lt;/div&gt;';
+        }
+
+        $this->flashMessenger->clearMessages();
+        $this->flashMessenger->clearCurrentMessages();
+        
+        return $output . "\n";
+    }
+    
+    public function setFlashMessenger(FlashMessenger $flashMessenger = null)
+    {
+        $this->flashMessenger = $flashMessenger;
+        return $this;
+    }
+    
+    public function getFlashMessenger()
+    {
+        return $this->flashMessenger;
+    }
+}
+</pre>
